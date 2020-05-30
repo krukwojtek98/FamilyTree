@@ -20,44 +20,31 @@ export class RegisterComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   error='';
 
-  ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      nickname: ['', Validators.required],
-      email: ['', Validators.email],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      password: ['', Validators.required]
-  });
-  }
+  ngOnInit() {}
 
-  nicknameFormControl = new FormControl('', [Validators.required]);
-  emailFormControl = new FormControl('', [Validators.required]);
-  firstnameFormControl = new FormControl('', [Validators.required]);
-  lastnameFormControl = new FormControl('', [Validators.required]);
-  passwordFormControl = new FormControl('', [Validators.required]);
+  nicknameFormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$')]);
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  firstnameFormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-ZŁ][a-zżźćńśąęó]*$')]);
+  lastnameFormControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-ZżźćńśąęóŻŹĆŚ,.-]+$')]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.pattern('^(?=.*?[A-ZŻŹĆŃĄŚÓĘ])(?=.*?[a-zżźćńśąęó])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]);
+  //co najmniej 1 duża litera,co najmniej 1 mała litera, co najmniej 1 znak specjalny, co najmniej 1 liczba, co najmniej 8 znaków
 
   loadSpinner: boolean;
 
   public register() {
 
-    this.loadSpinner = true;
-
-    let nickname = this.nicknameFormControl.value;
-    let email = this.emailFormControl.value;
-    let firstname = this.firstnameFormControl.value;
-    let lastname = this.lastnameFormControl.value;
-    let password = this.passwordFormControl.value;
-
-    if (nickname.length != 0 && password.length != 0){
-
-      this.registerService.registration(nickname, email, firstname,lastname,password).pipe(first()).subscribe(
-        data => {
-          this.router.navigate(['/login']);
-        },
-        err => {
-          this.error = err;
-          this.loadSpinner = false;
-        });
+    if(this.nicknameFormControl.valid && this.emailFormControl.valid && this.firstnameFormControl.valid && this.lastnameFormControl.valid && this.passwordFormControl.valid){
+      this.registerService.registration(
+        this.nicknameFormControl.value, this.emailFormControl.value, this.firstnameFormControl.value,this.lastnameFormControl.value,this.passwordFormControl.value)
+        .pipe(first()).subscribe(
+            data => {
+              this.router.navigate(['/login']);
+            },
+            err => {
+              this.error = err;
+            });
+    } else {
+      alert('Formularz jest źle wypełniony!')
     }
     
   }

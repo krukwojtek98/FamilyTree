@@ -17,6 +17,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatInputModule} from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatToolbarModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
+    MatTooltipModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
