@@ -3,6 +3,7 @@ import { TreeService } from '../services/tree/tree.service';
 import { Network, DataSet, Node, Edge } from 'vis';
 
 import realtionsConfig from '../../utils/relationsConfig.js';
+import networkConfig from '../../utils/networkConfig.js';
 
 
 @Component({
@@ -14,7 +15,7 @@ import realtionsConfig from '../../utils/relationsConfig.js';
 export class TreeComponent implements OnInit, AfterViewInit {
 
   tree = {}
-  options = {physics:{enabled:false}};  
+  options = networkConfig
 
   constructor(private treeService: TreeService) { }
 
@@ -27,7 +28,8 @@ export class TreeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() :void {
     const familyTreeGraphElement = this.getFamilyTreeGraphElement();
     const treeGraph = this.createGraphData(this.tree);
-    const network :Network = new Network(familyTreeGraphElement, treeGraph, this.options);
+    const network :Network = new Network(familyTreeGraphElement, treeGraph);
+    network.setOptions(this.options);
   }
 
   private getFamilyTreeGraphElement() {
