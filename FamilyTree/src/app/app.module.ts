@@ -18,15 +18,18 @@ import {MatInputModule} from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { TreeComponent } from './tree/tree.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {MatDividerModule} from '@angular/material/divider';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    TreeComponent
   ],
   imports: [
     MatFormFieldModule,
