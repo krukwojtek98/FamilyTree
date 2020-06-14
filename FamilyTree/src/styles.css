@@ -4,6 +4,10 @@
     align-items: center;
     border-radius: 25px;
 }
+
+body{
+    background-image: url('https://ak.picdn.net/shutterstock/videos/15235552/thumb/2.jpg');
+}
 .loginBox{
     align-self: center;
     background-color:#9b6f0f;
