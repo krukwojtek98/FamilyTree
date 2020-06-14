@@ -1,4 +1,7 @@
 export default {
+    interaction: {
+      hover: true
+    },
     layout: {
         hierarchical: {
           enabled:true,

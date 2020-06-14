@@ -15,6 +15,8 @@ import networkConfig from '../../utils/networkConfig.js';
 export class TreeComponent implements OnInit, AfterViewInit {
 
   tree = {}
+  treeName: String
+  network: Network
   options = networkConfig
 
   constructor(private treeService: TreeService) { }
@@ -23,13 +25,14 @@ export class TreeComponent implements OnInit, AfterViewInit {
     this.treeService.get_tree().subscribe(res => {
       this.tree = res;
     })
+    this.treeName = this.tree['name']
   }
 
   ngAfterViewInit() :void {
     const familyTreeGraphElement = this.getFamilyTreeGraphElement();
     const treeGraph = this.createGraphData(this.tree);
-    const network :Network = new Network(familyTreeGraphElement, treeGraph);
-    network.setOptions(this.options);
+    this.network = new Network(familyTreeGraphElement, treeGraph);
+    this.network.setOptions(this.options);
   }
 
   private getFamilyTreeGraphElement() {

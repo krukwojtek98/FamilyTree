@@ -4,3 +4,11 @@
     margin-top: 10px;
     width: 800px;
 }
+
+.treeName {
+    font-size: large;
+    font-weight: 500;
+    margin-top: 10px;
+    text-align: center;
+}
+
