@@ -19,8 +19,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { TreeComponent } from './tree/tree.component';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDividerModule} from '@angular/material/divider';
+import {FamilyMemberClassComponent} from './form/form.component';
+import {FormsModule} from '@angular/forms';
+import {MatStepperModule} from '@angular/material/stepper';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+ 
 
 
 @NgModule({
@@ -29,7 +34,9 @@ import {MatDividerModule} from '@angular/material/divider';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    TreeComponent
+    TreeComponent,
+    FamilyMemberClassComponent
+
   ],
   imports: [
     MatFormFieldModule,
@@ -45,11 +52,15 @@ import {MatDividerModule} from '@angular/material/divider';
     BrowserModule,
     appRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    MatStepperModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }}
+
   ],
   bootstrap: [AppComponent]
 })

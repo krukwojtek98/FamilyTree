@@ -1,3 +1,5 @@
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
 .container{
     display: flex;
     justify-content: center;
@@ -53,3 +55,33 @@ body{
   
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.family_list
+{
+ align-items: center;
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+ width: 50%;
+}
+.family_list li
+{
+ list-style: none;
+}
+
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+    background-color: rgb(27, 148, 20)!important;
+    color: white !important;
+}
+.toright70{
+  display: inline-block;
+  position: absolute;
+  left: 70%;
+}
+.toright60{
+  display: inline-block;
+  position: absolute;
+  left: 60%;
+}

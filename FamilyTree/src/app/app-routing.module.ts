@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import { TreeComponent } from './tree/tree.component';
+import { FamilyMemberClassComponent } from './form/form.component';
+
 
 
 const routes: Routes = [
@@ -12,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegisterComponent},
   { path: 'tree', component: TreeComponent},
+  { path: 'form', component: FamilyMemberClassComponent },
   { path: '**', redirectTo: '' }
 ];
 
