@@ -1,1 +1,7 @@
-<p>list-of-trees works!</p>
+<div *ngIf="showButtons" >
+    <div *ngFor="let item of Trees; let i = index" [attr.data-index]="i">
+        <button style="width: 300px; height: 100px; background-color: burlywood;" value="item.id">{{item.name}}</button>
+        <br>
+    </div>
+</div>
+

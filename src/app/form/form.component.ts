@@ -8,7 +8,12 @@ import { TargetMember } from '../target-member';
 import { variable } from '@angular/compiler/src/output/output_ast';
 import { NewTreeService } from '../new-tree.service';
 import { first } from 'rxjs/operators';
+
 import { Name } from '../name';
+
+import { LoginComponent } from '../login/login.component';
+import { LoginService } from '../login-service.service';
+
 
 @Component({
   selector: 'app-form',
@@ -29,7 +34,7 @@ export class FamilyMemberClassComponent implements OnInit {
   jsonString: string;
   onlyNames = new Array();
 
-  constructor(private _formBuilder: FormBuilder, private newTree: NewTreeService) { }
+  constructor(private _formBuilder: FormBuilder, private newTree: NewTreeService, private loginService: LoginService) { }
 
   names: Array<Name> = [];
 
@@ -105,13 +110,19 @@ export class FamilyMemberClassComponent implements OnInit {
 
   submitFamily() {
 
+
     console.log(JSON.stringify({Name: this.title, Members: this.names, Relations: this.relations}));
 
     this.jsonString=JSON.stringify({Name: this.title, Members: this.names, Relations: this.relations});
 
+    
+    let id = this.loginService.currentUserValue.userId;
+    console.log("ID" + id);
+
+
     this.newTree.sendTree(this.jsonString).pipe(first()).subscribe(
       data => {
-        console.log("Wysłano drzewo");
+        console.log(data);
       },
       err => {
       });
