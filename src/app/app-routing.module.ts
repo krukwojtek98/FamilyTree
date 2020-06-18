@@ -6,6 +6,7 @@ import { AuthGuard } from './helpers/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import { TreeComponent } from './tree/tree.component';
 import { FamilyMemberClassComponent } from './form/form.component';
+import { ListOfTreesComponent } from './list-of-trees/list-of-trees.component';
 
 
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'registration', component: RegisterComponent},
   { path: 'tree', component: TreeComponent, canActivate: [AuthGuard]},
   { path: 'form', component: FamilyMemberClassComponent, canActivate: [AuthGuard] },
+  { path: 'listoftree', component: ListOfTreesComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 

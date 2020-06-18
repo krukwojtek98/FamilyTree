@@ -25,6 +25,7 @@ import {FamilyMemberClassComponent} from './form/form.component';
 import {FormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { ListOfTreesComponent } from './list-of-trees/list-of-trees.component';
  
 
 
@@ -35,7 +36,8 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
     RegisterComponent,
     LoginComponent,
     TreeComponent,
-    FamilyMemberClassComponent
+    FamilyMemberClassComponent,
+    ListOfTreesComponent
 
   ],
   imports: [
