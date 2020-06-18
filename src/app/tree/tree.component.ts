@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TreeService } from '../services/tree/tree.service';
+import { first } from 'rxjs/operators';
 import { Network, DataSet, Node, Edge } from 'vis';
+import { Router } from '@angular/router';
 
 import realtionsConfig from '../../utils/relationsConfig.js';
 import networkConfig from '../../utils/networkConfig.js';
@@ -12,27 +14,29 @@ import networkConfig from '../../utils/networkConfig.js';
   styleUrls: ['./tree.component.css']
 })
 
-export class TreeComponent implements OnInit, AfterViewInit {
+export class TreeComponent implements OnInit {
 
   tree = {}
   treeName: String
   network: Network
   options = networkConfig
 
-  constructor(private treeService: TreeService) { }
+  constructor(private treeService: TreeService, private router: Router) { }
 
   ngOnInit(): void {
-    this.treeService.get_tree().subscribe(res => {
-      this.tree = res;
-    })
-    this.treeName = this.tree['name']
-  }
-
-  ngAfterViewInit() :void {
-    const familyTreeGraphElement = this.getFamilyTreeGraphElement();
-    const treeGraph = this.createGraphData(this.tree);
-    this.network = new Network(familyTreeGraphElement, treeGraph);
-    this.network.setOptions(this.options);
+    if(this.treeService.treeId == undefined){
+      this.router.navigate(['/listoftree']);
+    }
+    else{
+      this.treeService.getTree().pipe(first()).subscribe(data => {
+        this.tree = data
+        this.treeName = this.tree['name']
+        const familyTreeGraphElement = this.getFamilyTreeGraphElement();
+        const treeGraph = this.createGraphData(this.tree);
+        this.network = new Network(familyTreeGraphElement, treeGraph);
+        this.network.setOptions(this.options);
+      });
+    }
   }
 
   private getFamilyTreeGraphElement() {
