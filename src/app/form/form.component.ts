@@ -8,8 +8,12 @@ import { TargetMember } from '../target-member';
 import { variable } from '@angular/compiler/src/output/output_ast';
 import { NewTreeService } from '../new-tree.service';
 import { first } from 'rxjs/operators';
+
+import { Name } from '../name';
+
 import { LoginComponent } from '../login/login.component';
 import { LoginService } from '../login-service.service';
+
 
 @Component({
   selector: 'app-form',
@@ -32,7 +36,9 @@ export class FamilyMemberClassComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder, private newTree: NewTreeService, private loginService: LoginService) { }
 
+  names: Array<Name> = [];
 
+  
   FamilyList: Array<FamilyMember> = [];
   familyNumber: number;
   familynumberList: Array<number> = [];
@@ -55,7 +61,8 @@ export class FamilyMemberClassComponent implements OnInit {
   add() {
     this.FamilyList.push(this.model);
     console.log(this.model);
-    this.onlyNames.push(this.model.name);
+    this.names.push(new Name(this.model.Name));
+
     console.log(this.onlyNames);
   }
 
@@ -64,7 +71,7 @@ export class FamilyMemberClassComponent implements OnInit {
   }
 
   newFamilyMember() {
-    if (this.model.name !== null && this.model.name !== '') {
+    if (this.model.Name !== null && this.model.Name !== '') {
       this.add();
       this.index = this.index + 1;
       this.model = new FamilyMember(this.index, '', '');
@@ -77,15 +84,15 @@ export class FamilyMemberClassComponent implements OnInit {
 
 
 
-  relation = new Relation(0, 1, '');
+  relation = new Relation(0, 1, 0);
 
   relations: Array<Relation> = [];
 
 
   newRelation() {
-    if (this.relation.relation !== null && this.relation.relation !== '') {
+    if (this.relation.RelationType !== null) {
       this.relations.push(this.relation);
-      this.relation = new Relation(0, 1, '');
+      this.relation = new Relation(0, 1, 0);
     }
 
     console.log(this.relations);
@@ -103,12 +110,15 @@ export class FamilyMemberClassComponent implements OnInit {
 
   submitFamily() {
 
-    this.jsonString = JSON.stringify(this.title);
-    this.jsonString += JSON.stringify(this.onlyNames);
-    this.jsonString += JSON.stringify(this.relations);
-    console.log(this.jsonString);
+
+    console.log(JSON.stringify({Name: this.title, Members: this.names, Relations: this.relations}));
+
+    this.jsonString=JSON.stringify({Name: this.title, Members: this.names, Relations: this.relations});
+
+    
     let id = this.loginService.currentUserValue.userId;
     console.log("ID" + id);
+
 
     this.newTree.sendTree(this.jsonString).pipe(first()).subscribe(
       data => {
