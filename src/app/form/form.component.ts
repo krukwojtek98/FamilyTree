@@ -91,6 +91,9 @@ export class FamilyMemberClassComponent implements OnInit {
 
   newRelation() {
     if (this.relation.RelationType !== null) {
+      this.relation.SourceMemberIndex = Number(this.relation.SourceMemberIndex)
+      this.relation.TargetMemberIndex = Number(this.relation.TargetMemberIndex)
+      this.relation.RelationType = Number(this.relation.RelationType)
       this.relations.push(this.relation);
       this.relation = new Relation(0, 1, 0);
     }
@@ -110,15 +113,9 @@ export class FamilyMemberClassComponent implements OnInit {
 
   submitFamily() {
 
-
-    console.log(JSON.stringify({Name: this.title, Members: this.names, Relations: this.relations}));
-
-    this.jsonString=JSON.stringify({Name: this.title, Members: this.names, Relations: this.relations});
-
-    
     let id = this.loginService.currentUserValue.userId;
-    console.log("ID" + id);
 
+    this.jsonString=JSON.stringify({userId: id, Name: this.title, Members: this.names, Relations: this.relations});
 
     this.newTree.sendTree(this.jsonString).pipe(first()).subscribe(
       data => {
