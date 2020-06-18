@@ -25,7 +25,7 @@
         <form [formGroup]="secondFormGroup" #form="ngForm" (ngSubmit)="onSubmit()">
           <h1>Add New Family Member</h1>
           <mat-label>Name</mat-label>
-          <input class="form-control" matInput formControlName="secondCtrl" [(ngModel)]="model.name" placeholder="Name"
+          <input class="form-control" matInput formControlName="secondCtrl" [(ngModel)]="model.Name" placeholder="Name"
             pattern="^[A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15}-[A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}( |-)[A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}$ ">
           <p class="form__field__error">The name is invalid. Please enter it again.</p>
           <p class="form__field__error">You can use 1-4 words (2-15 characters each, only letters and "-" if you want to
@@ -38,7 +38,7 @@
         <h2>Added family members:</h2>
           <ul>
             <li *ngFor="let model of FamilyList">
-              {{model.name}}
+              {{model.Name}}
             </li>
           </ul>
         </div>
@@ -54,17 +54,17 @@
           <br>
           <div class="form-group">
             <label for="member">Source Member</label>
-            <select class="form-control" id="member" required [(ngModel)]="relation.sourceMemberId" name="name">
-              <option *ngFor="let mem of FamilyList" [value]="mem.id">{{mem.name}}</option>
+            <select class="form-control" id="member" required [(ngModel)]="relation.SourceMemberIndex" name="name">
+              <option *ngFor="let mem of FamilyList" [value]="mem.id">{{mem.Name}}</option>
             </select>
 
             <label for="member">Target Member</label>
-            <select class="form-control" id="member" required [(ngModel)]="relation.targetMemberId" name="name">
-              <option *ngFor="let mem of FamilyList" [value]="mem.id">{{mem.name}}</option>
+            <select class="form-control" id="member" required [(ngModel)]="relation.TargetMemberIndex" name="name">
+              <option *ngFor="let mem of FamilyList" [value]="mem.id">{{mem.Name}}</option>
             </select>
 
             <label for="relation">Relation</label>
-            <select class="form-control" id="relation" required [(ngModel)]="relation.relation" name="relationType">
+            <select class="form-control" id="relation" required [(ngModel)]="relation.RelationType" name="relationType">
               <option *ngFor="let rel of relationType" [value]="relationType.indexOf(rel)">{{rel}}</option>
             </select>
 
@@ -84,8 +84,8 @@
             <h2>Added relations:</h2>
               <ul>
                 <li *ngFor="let model of relations">
-                 Source Member: {{FamilyList[model.sourceMemberId].name}}<br>
-                 Target Member: {{FamilyList[model.targetMemberId].name}}<br>
+                 Source Member: {{FamilyList[model.SourceMemberIndex].Name}}<br>
+                 Target Member: {{FamilyList[model.TargetMemberIndex].Name}}<br>
                  Relation: {{relationType[model.relation]}} <br>
                  <br>
                 </li>

@@ -1,7 +1,7 @@
 export class Relation {
     constructor(
-        public sourceMemberId:number,
-        public targetMemberId:number,
-        public relation: string
-    ){}
+        public SourceMemberIndex: number,
+        public TargetMemberIndex: number,
+        public RelationType: number
+    ) { }
 }
