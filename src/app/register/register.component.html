@@ -1,9 +1,6 @@
 <div class="container">
     <mat-card class="registerBox" style="border-radius: 25px;">
         <mat-card-title style="text-align: center; color: #277209; font-weight: 700;">Rejestracja</mat-card-title>
-        <div>
-            <p>{{error}}</p>
-        </div>
         <div style="border-radius: 25px;">
             <mat-form-field class="formFields" appearance="fill">
                 <mat-label style="color: #278514; font-weight: 700;">E-mail:</mat-label>
@@ -39,9 +36,13 @@
             <div style="margin-top: 3px; margin-right: auto; margin-left: auto; align-items: center; text-align: center;">
                 <button mat-raised-button  type="submit" (click)="register()">Zarejestruj się!</button>
             </div>
+            <div>
+                <p>{{error}}</p>
+            </div>
             <div style="margin-top: 3%; margin-right: auto; margin-left: auto; align-items: center; text-align: center;"> 
                 <a routerLink="/login">Wróć do logowania</a>
             </div>
+
         </div>
   </mat-card>    
 </div>
