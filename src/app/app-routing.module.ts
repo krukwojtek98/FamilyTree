@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'registration', component: RegisterComponent},
   { path: 'tree', component: TreeComponent, canActivate: [AuthGuard]},
   { path: 'form', component: FamilyMemberClassComponent, canActivate: [AuthGuard] },
-  { path: 'listoftree', component: ListOfTreesComponent, canActivate: [AuthGuard] },
+  { path: 'listoftrees', component: ListOfTreesComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 

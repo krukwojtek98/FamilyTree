@@ -36,12 +36,11 @@ export class LoginComponent implements OnInit {
       });
       }
 
-      emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+      emailFormControl = new FormControl('', [Validators.required]);
       passwordFormControl = new FormControl('', [Validators.required]);
 
 
     
-      // usernameFormControl = new FormControl('', [Validators.required]);
 
     
       loadSpinner: boolean;
@@ -57,7 +56,6 @@ export class LoginComponent implements OnInit {
           this.loginService.login(email, password).pipe(first()).subscribe(
             data => {
               console.log("Udało się!")
-              //this.loadSpinner = this.loginService.currentLoadingValue;
               this.router.navigate(['/']);
             },
             err => {

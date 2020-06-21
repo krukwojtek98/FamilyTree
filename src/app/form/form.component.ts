@@ -13,6 +13,7 @@ import { Name } from '../name';
 
 import { LoginComponent } from '../login/login.component';
 import { LoginService } from '../login-service.service';
+import { RouterLink, Router } from '@angular/router';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class FamilyMemberClassComponent implements OnInit {
   jsonString: string;
   onlyNames = new Array();
 
-  constructor(private _formBuilder: FormBuilder, private newTree: NewTreeService, private loginService: LoginService) { }
+  constructor(private _formBuilder: FormBuilder, private newTree: NewTreeService, private loginService: LoginService,
+    private router: Router) { }
 
   names: Array<Name> = [];
 
@@ -120,6 +122,8 @@ export class FamilyMemberClassComponent implements OnInit {
     this.newTree.sendTree(this.jsonString).pipe(first()).subscribe(
       data => {
         console.log(data);
+        window.alert("Twoje drzewo zostało utworzone!")
+        this.router.navigate(['/listoftrees']);
       },
       err => {
       });
