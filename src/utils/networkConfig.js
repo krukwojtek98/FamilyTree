@@ -1,18 +1,19 @@
 export default {
+    physics: false,
     interaction: {
       hover: true
     },
     layout: {
         hierarchical: {
-          enabled:true,
+          enabled: true,
           levelSeparation: 100,
           nodeSpacing: 200,
           treeSpacing: 150,
           blockShifting: true,
           edgeMinimization: true,
-          parentCentralization: true,
+          parentCentralization: false,
           direction: 'UD',
-          sortMethod: 'hubsize'
+          sortMethod: 'directed'
         }
     },
     nodes:{
