@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {}
 
-  nicknameFormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$')]);
+  nicknameFormControl = new FormControl('', [Validators.required]);
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.pattern('^(?=.*?[A-ZŻŹĆŃĄŚÓĘ])(?=.*?[a-zżźćńśąęó])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]);
   //co najmniej 1 duża litera,co najmniej 1 mała litera, co najmniej 1 znak specjalny, co najmniej 1 liczba, co najmniej 8 znaków
@@ -30,13 +30,13 @@ export class RegisterComponent implements OnInit {
   loadSpinner: boolean;
 
   public register() {
-
     if(this.nicknameFormControl.valid && this.emailFormControl.valid && this.passwordFormControl.valid){
+      this.loadSpinner = true;
       this.registerService.registration(
-        this.nicknameFormControl.value, this.emailFormControl.value,this.passwordFormControl.value)
+        this.emailFormControl.value,this.nicknameFormControl.value, this.passwordFormControl.value)
         .pipe(first()).subscribe(
             data => {
-              console.log("Udała się rejestracja");
+              this.loadSpinner = false;
               this.router.navigate(['/login']);
             },
             err => {

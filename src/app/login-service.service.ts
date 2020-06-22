@@ -27,7 +27,6 @@ export class LoginService {
            email:email,
            password: password
          };
-         console.log(data);
         return this.http.post<any>(`${environment.apiUrl}`+ '/api/auth/login',data,{headers: new HttpHeaders({ 
             'Content-Type':'application/json'}),
             responseType: 'json'})

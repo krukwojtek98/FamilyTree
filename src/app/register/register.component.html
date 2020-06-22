@@ -33,8 +33,9 @@
                     Hasło jest <strong>wymagane</strong>
                 </mat-error>
             </mat-form-field>
-            <div style="margin-top: 3px; margin-right: auto; margin-left: auto; align-items: center; text-align: center;">
+            <div style="margin-top: 3px;">
                 <button mat-raised-button  type="submit" (click)="register()">Zarejestruj się!</button>
+                <mat-spinner class="spinner" color="primary" diameter="40" *ngIf="loadSpinner"></mat-spinner>
             </div>
             <div>
                 <p>{{error}}</p>

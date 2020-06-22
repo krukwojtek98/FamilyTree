@@ -3,7 +3,6 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable } from 'rxjs';
 
 import { LoginService } from 'src/app/login-service.service';
-import { NewTreeService } from '../new-tree.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -12,7 +11,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
         let currentUser = this.loginService.currentUserValue;
         if (currentUser && currentUser.token) {
-            console.log("JWT");
             request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${currentUser.token}`

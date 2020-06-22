@@ -56,16 +56,12 @@ export class FamilyMemberClassComponent implements OnInit {
 
   saveTitle() {
     this.title = this.title;
-    console.log(this.title);
   }
   submitted = false;
 
   add() {
     this.FamilyList.push(this.model);
-    console.log(this.model);
     this.names.push(new Name(this.model.Name));
-
-    console.log(this.onlyNames);
   }
 
   onSubmit() {
@@ -77,11 +73,8 @@ export class FamilyMemberClassComponent implements OnInit {
       this.add();
       this.index = this.index + 1;
       this.model = new FamilyMember(this.index, '', '');
-      // this.onlyNames.push(this.model.name);
 
     }
-    console.log(this.FamilyList);
-    // console.log('names:' + this.onlyNames);
   }
 
 
@@ -99,8 +92,6 @@ export class FamilyMemberClassComponent implements OnInit {
       this.relations.push(this.relation);
       this.relation = new Relation(0, 1, 0);
     }
-
-    console.log(this.relations);
   }
 
 
@@ -113,22 +104,21 @@ export class FamilyMemberClassComponent implements OnInit {
     });
   }
 
+  loadSpinner: boolean;
+
   submitFamily() {
 
+    this.loadSpinner = true;
     let id = this.loginService.currentUserValue.userId;
 
     this.jsonString=JSON.stringify({userId: id, Name: this.title, Members: this.names, Relations: this.relations});
 
     this.newTree.sendTree(this.jsonString).pipe(first()).subscribe(
       data => {
-        console.log(data);
-        window.alert("Twoje drzewo zostało utworzone!")
+        this.loadSpinner = false;
         this.router.navigate(['/listoftrees']);
       },
       err => {
       });
   }
-
-  // TODO: Remove this when we're done
-  //  get diagnostic() { return JSON.stringify(this.model); }
 }

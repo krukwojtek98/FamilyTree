@@ -1,4 +1,7 @@
-<div *ngIf="showButtons" >
+<div *ngIf="loadSpinner" style="text-align: center; align-items: center; margin-left: auto; margin-right: auto; margin-top: 3%;">
+    <mat-spinner class="spinner" color="primary" diameter="40" ></mat-spinner>
+</div>
+<div *ngIf="showButtons" style="margin-top: 3%;">
     <div *ngFor="let item of Trees; let i = index" [attr.data-index]="i">
         <button mat-button style="width: 200px; height: 100px; margin-bottom: 1%; background-color: burlywood;" value="item.id" (click)="goToTree(item.id)">{{item.name}}</button>
         <br>

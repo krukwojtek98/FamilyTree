@@ -10,10 +10,10 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  registration( email: EmailValidator,nickname: string, password: string) {
+  registration( email: string,nickname: string, password: string) {
     let data ={
       email: email,
-      Nick:nickname,
+      Name:nickname,
       password:password
     }
      return this.http.post<any>(`${environment.apiUrl}`+ '/api/auth/register',data,{headers: new HttpHeaders({ 

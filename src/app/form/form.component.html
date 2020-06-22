@@ -1,103 +1,104 @@
-<body>
+
   <div class="container">
 
     <mat-horizontal-stepper linear #stepper>
       <mat-step [stepControl]="firstFormGroup">
-        <ng-template matStepLabel>Step 1</ng-template>
+        <ng-template matStepLabel>Krok 1</ng-template>
         <form [formGroup]="firstFormGroup">
-          <h1>Welcome to Family Tree Creator!</h1>
+          <h1>Witaj w kreatorze drzewa genealogicznego!</h1>
           <img [src]=myimage>
-          <h2>Name your tree and press next to start.</h2>
-          <mat-label> Name</mat-label>
-          <input class="form-control" matInput placeholder="Tree Name" formControlName="firstCtrl" required
+          <h2>Nazwij swoje drzewo i kliknij "Dalej" aby rozpocząć tworzenie drzewa.</h2>
+          <mat-label> Nazwa drzewa</mat-label>
+          <input class="form-control" matInput placeholder="Nazwa drzewa" formControlName="firstCtrl" required
             [(ngModel)]="title"
             pattern="^[A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}$">
-          <p class="form__field__error">The title is invalid. Please enter it again. You can use 1-5 words (2-15
-            characters each, only letters).</p>
+          <p class="form__field__error">Nazwa jest nieprawidłowa. Spróbuj jeszcze raz. Możesz użyć 1-5 słów (2-15
+            znaków każde, tylko litery).</p>
 
           <div>
-            <button mat-button matStepperNext (click)="saveTitle(); form.reset()">Next</button>
+            <button mat-button matStepperNext (click)="saveTitle(); form.reset()">Dalej</button>
           </div>
         </form>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
-        <ng-template matStepLabel>Step 2</ng-template>
+        <ng-template matStepLabel>Krok 2</ng-template>
         <form [formGroup]="secondFormGroup" #form="ngForm" (ngSubmit)="onSubmit()">
-          <h1>Add New Family Member</h1>
-          <mat-label>Name</mat-label>
-          <input class="form-control" matInput formControlName="secondCtrl" [(ngModel)]="model.Name" placeholder="Name"
+          <h1>Dodaj do drzewa nową osobę</h1>
+          <mat-label>Imię</mat-label>
+          <input class="form-control" matInput formControlName="secondCtrl" [(ngModel)]="model.Name" placeholder="Imię"
             pattern="^[A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15}-[A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}( |-)[A-Za-z]{2,15}$|^[A-Za-z]{2,15} [A-Za-z]{2,15} [A-Za-z]{2,15}$ ">
-          <p class="form__field__error">The name is invalid. Please enter it again.</p>
-          <p class="form__field__error">You can use 1-4 words (2-15 characters each, only letters and "-" if you want to
-            use double-barrelled surname).</p>
+          <p class="form__field__error">Imię jest nieprawidłowe, spróbuj ponownie.</p>
+          <p class="form__field__error">Możesz użyć 1-5 słów (2-15 znaków każde, tylko litery oraz "-").</p>
 
-          <button type="button" class="btn btn-default" [disabled]="!form.form.valid" (click)="newFamilyMember(); form.reset()">Add this member</button>
+          <button type="button" class="btn btn-default" [disabled]="!form.form.valid" (click)="newFamilyMember(); form.reset()">Dodaj tę osobę</button>
         <br>
         <br>
         <div class="family_list">
-        <h2>Added family members:</h2>
+        <h2>Dodane osoby:</h2>
           <ul>
             <li *ngFor="let model of FamilyList">
               {{model.Name}}
             </li>
           </ul>
         </div>
-        <button mat-button matStepperNext type="submit" class="btn btn-success toright70" >Done!</button>
-        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext type="submit" class="btn btn-success toright70" >Gotowe!</button>
+        <button mat-button matStepperPrevious>Powrót</button>
         </form>
       </mat-step>
 
       <mat-step>
-        <ng-template matStepLabel>Step 3</ng-template>
-        <h1>Add a new relation:</h1>
+        <ng-template matStepLabel>Krok 3</ng-template>
+        <h1>Dodaj nową relację:</h1>
         <div>
           <br>
           <div class="form-group">
-            <label for="member">Source Member</label>
+            <label for="member">Osoba od której wychodzi relacja</label>
             <select class="form-control" id="member" required [(ngModel)]="relation.SourceMemberIndex" name="name">
               <option *ngFor="let mem of FamilyList" [value]="mem.id">{{mem.Name}}</option>
             </select>
 
-            <label for="member">Target Member</label>
+            <label for="member">Osoba docelowa relacji</label>
             <select class="form-control" id="member" required [(ngModel)]="relation.TargetMemberIndex" name="name">
               <option *ngFor="let mem of FamilyList" [value]="mem.id">{{mem.Name}}</option>
             </select>
 
-            <label for="relation">Relation</label>
+            <label for="relation">Relacja</label>
             <select class="form-control" id="relation" required [(ngModel)]="relation.RelationType" name="relationType">
               <option *ngFor="let rel of relationType" [value]="relationType.indexOf(rel)">{{rel}}</option>
             </select>
 
             <br>
-            <button class="btn btn-default" (click)="newRelation(); form.reset()">Add this relation</button>
+            <button class="btn btn-default" (click)="newRelation(); form.reset()">Dodaj tę relację</button>
             <br>
             <br>
-            <h4 style="margin-bottom: 0px; font-weight:bold;">Example:</h4>
+            <h4 style="margin-bottom: 0px; font-weight:bold;">Przykład:</h4>
             <div>
-              Source Member: Will Smith <br>Target Member: Jaden Smith <br>Relation: father<br>
-              Created Relation: Will Smith is Jaden Smith's father
+              Osoba od której wychodzi relacja: Will Smith <br>Osoba docelowa relacji: Jaden Smith <br>Relacja: father<br>
+              Stworzona relacja: Will Smith jest ojcem Jadena Smitha
             </div>
 
           </div>
 
           <div class="family_list">
-            <h2>Added relations:</h2>
+            <h2>Dodane relacje:</h2>
               <ul>
                 <li *ngFor="let model of relations">
                  Source Member: {{FamilyList[model.SourceMemberIndex].Name}}<br>
                  Target Member: {{FamilyList[model.TargetMemberIndex].Name}}<br>
-                 Relation: {{relationType[model.relation]}} <br>
+                 Relacja: {{relationType[model.RelationType]}} <br>
                  <br>
                 </li>
               </ul>
           </div>
-          <button class="btn btn-success toright60" (click)="submitFamily()">Create Family Tree!</button>
-
-          <button mat-button matStepperPrevious>Back</button>
+          <mat-spinner *ngIf="loadSpinner" style="margin-left: 5%;" class="spinner" color="primary" diameter="40" ></mat-spinner>
+          <button mat-button matStepperPrevious>Powrót</button>
           <button mat-button (click)="stepper.reset()">Reset</button>
+          <button class="btn btn-success toright30" (click)="submitFamily()">Stwórz drzewo!</button>
 
         </div>
       </mat-step>
     </mat-horizontal-stepper>
   </div>
-</body>
+
+
+

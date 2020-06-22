@@ -19,20 +19,11 @@ export class ListOfTreesComponent implements OnInit {
 
   Trees: Tree[] = [];
   showButtons: boolean = false;
+  loadSpinner: boolean;
 
   ngOnInit(): void {
-
-    
+    this.loadSpinner = true;
     this.getTrees();
-
-    // this.treesList.showList(id).pipe(first()).subscribe(
-    //   data => {
-    //     this.Trees = data;
-    //     console.log("Drzewa" + this.Trees);
-    //     console.log(this.Trees[0].name);
-    //   },
-    //   err => {
-    //   });
   }
 
   getTrees() {
@@ -46,13 +37,12 @@ export class ListOfTreesComponent implements OnInit {
             return this.treesList.showList(id);
           }),
           map(data => {
-            console.log(data);
             return data.trees;
           }))
           .subscribe(
             data => {
+              this.loadSpinner = false;
               this.Trees = data;
-              console.log(this.Trees[0].name);
               this.showButtons = true;
             }
           );
